@@ -1,16 +1,41 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
+import Layout from './Layout/Layout'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import Register from './pages/Register'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div className='font-bold text-3xl'>
-        Hello with React
-      </div>
+      <Router>
+        <Routes>
+
+          <Route path='/' element={
+            <Layout>
+              <p>Home Page</p>
+            </Layout>}>
+          </Route>
+
+          <Route path='/search'
+            element={
+              <Layout>
+                <p>Search Page</p>
+              </Layout>}>
+          </Route>
+
+          <Route path='/register'
+            element={
+              <Layout>
+                <Register />
+              </Layout>}>
+          </Route>
+
+          <Route path='*' element={<Navigate to={"/"}></Navigate>}></Route>
+        </Routes>
+      </Router>
     </>
   )
 }
