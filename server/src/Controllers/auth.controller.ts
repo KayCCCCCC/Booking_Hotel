@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import User from '../Models/user';
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
-import bcrypt from "bcryptjs"
+import * as bcrypt from "bcryptjs"
 export const AuthController = {
     login: async (req: Request, res: Response) => {
         const errors = validationResult(req);
@@ -28,6 +28,15 @@ export const AuthController = {
             });
 
             res.status(200).json({ userId: user.id })
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Something went wrong!" });
+        }
+    },
+
+    validateToken: async (req: Request, res: Response) => {
+        try {
+            res.status(200).send({ userId: req.userId })
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: "Something went wrong!" });
