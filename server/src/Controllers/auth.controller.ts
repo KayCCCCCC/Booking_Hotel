@@ -41,5 +41,16 @@ export const AuthController = {
             console.error(error);
             res.status(500).json({ message: "Something went wrong!" });
         }
+    },
+    logOut: async (req: Request, res: Response) => {
+        try {
+            res.cookie("auth_token", "", {
+                expires: new Date(0)
+            })
+            res.send()
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Something went wrong!" });
+        }
     }
 }
