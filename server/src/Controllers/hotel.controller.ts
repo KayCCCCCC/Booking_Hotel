@@ -36,5 +36,14 @@ export const hotelController = {
             console.error(error);
             res.status(500).json({ message: "Something went wrong!" });
         }
+    },
+    findByUserId: async (req: Request, res: Response) => {
+        try {
+            const hotels = await Hotel.find({ userId: req.userId })
+            res.json(hotels)
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Something went wrong!" });
+        }
     }
 }
