@@ -16,7 +16,7 @@ const EditHotel = () => {
                 type: "success"
             })
         },
-        onError: (error: Error) => {
+        onError: () => {
             showToast({
                 message: "Error in update hotel",
                 type: "error"
