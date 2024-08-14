@@ -2,10 +2,11 @@ import { useFormContext } from "react-hook-form"
 import { HotelFormData } from "./ManageHotelForm";
 
 const DetailSection = () => {
-    const { register, formState: { errors } } = useFormContext<HotelFormData>();
+    const { register, formState: { errors }, watch } = useFormContext<HotelFormData>();
+    const existHotel = watch("name");
     return (
         <div className="flex flex-col gap-4">
-            <div className="text-3xl font-bold mb-3">Add Hotel</div>
+            {existHotel ? <div className="text-3xl font-bold mb-3">Update Hotel</div> : <div className="text-3xl font-bold mb-3">Add Hotel</div>}
             <label className="text-gray-700 text-sm font-bold flex-1">
                 Name
                 <input type="text" className="border rounded w-full py-1 px-2 font-normal" {...register("name", { required: "Name is required" })}></input>
