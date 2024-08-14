@@ -30,6 +30,10 @@ app.use(express.static(path.join(__dirname, "../../client/dist"))) // match with
 
 app.use("/api", router)
 
+app.get("*", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, "../../client/dist/index.html"))
+})
+
 app.listen(7000, () => {
     console.log("server running on localhost:7000")
 })
