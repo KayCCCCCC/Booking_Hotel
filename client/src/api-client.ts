@@ -1,7 +1,7 @@
 import { RegisterFormData } from "./pages/Register.tsx";
 import { SignInFormData } from "./pages/SignIn.tsx";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://mern-booking-app-m5si.onrender.com";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "https://mern-booking-app-m5si.onrender.com";
 
 export const register = async (formData: RegisterFormData) => {
     const response = await fetch(`${API_BASE_URL}/api/user/register`, {
