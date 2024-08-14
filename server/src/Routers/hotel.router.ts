@@ -16,5 +16,8 @@ const upload = multer({
 
 router.post("/create", verifyToken, createHotelValidation, upload.array("imageFiles", 6), hotelController.create)
 router.get("/get-by-userId", verifyToken, hotelController.findByUserId)
+router.get("/get-by-id/:id", verifyToken, hotelController.findById)
+router.put("/update/:hotelId", verifyToken, upload.array("imageFiles", 6), hotelController.update)
+
 
 export default router
