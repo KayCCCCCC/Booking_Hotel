@@ -39,7 +39,7 @@ const DetailSection = () => {
             </label>
             <label className="text-gray-700 text-sm font-bold max-w-[50%]">
                 Price Per Night
-                <input type="number" className="border rounded w-full py-1 px-2 font-normal" {...register("pricePerNight", { required: "Price Per Night is required" })}></input>
+                <input type="number" className="border rounded w-full py-1 px-2 font-normal" {...register("pricePerNight", { required: "Price Per Night is required", validate: (value) => value > 0 || "Price Per Night must be greater than 0", })}></input>
                 {errors.pricePerNight && (
                     <span className="text-red-500">{errors.pricePerNight.message}</span>
                 )}
