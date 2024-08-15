@@ -9,6 +9,9 @@ import MyHotels from './pages/MyHotels'
 import EditHotel from './pages/EditHotel'
 import Search from './pages/Search'
 import Detail from './pages/Detail'
+import Booking from './pages/Booking'
+import MyBookings from './pages/MyBooking'
+import Home from './pages/Home'
 
 function App() {
   const { isLogin } = useAppContext();
@@ -19,7 +22,7 @@ function App() {
 
           <Route path='/' element={
             <Layout>
-              <p>Home Page</p>
+              <Home />
             </Layout>}>
           </Route>
 
@@ -52,6 +55,12 @@ function App() {
           </Route>
           {isLogin &&
             <>
+              <Route path='/hotel/:hotelId/booking'
+                element={
+                  <Layout>
+                    <Booking />
+                  </Layout>}>
+              </Route>
               <Route path='/add-hotel'
                 element={
                   <Layout>
@@ -62,6 +71,12 @@ function App() {
                 element={
                   <Layout>
                     <MyHotels />
+                  </Layout>}>
+              </Route>
+              <Route path='/my-booking'
+                element={
+                  <Layout>
+                    <MyBookings />
                   </Layout>}>
               </Route>
               <Route path='/edit-hotel/:hotelId'
