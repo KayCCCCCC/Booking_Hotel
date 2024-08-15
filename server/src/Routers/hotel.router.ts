@@ -10,7 +10,7 @@ const storage = multer.memoryStorage();
 const upload = multer({
     storage: storage,
     limits: {
-        fileSize: 5 * 1024 * 1024 // 5mb
+        fileSize: 5 * 1024 * 1024 // 5mb                                       
     }
 })
 
@@ -20,7 +20,8 @@ router.get("/get-by-userId", verifyToken, hotelController.findByUserId)
 router.get("/get-by-id/:id", verifyToken, hotelController.findById)
 router.put("/update/:hotelId", verifyToken, upload.array("imageFiles", 6), hotelController.update)
 
-// hotel
+// hotel 
 router.get("/search", hotelController.search)
+router.get("/get/:id", hotelController.getById)
 
 export default router

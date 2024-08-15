@@ -116,6 +116,26 @@ export const hotelController = {
             console.error(error);
             res.status(500).json({ message: "Something went wrong!" });
         }
+    },
+    getById: async (req: Request, res: Response) => {
+        try {
+            const id = req.params.id.toString();
+            if (!id) {
+                res.status(400).json({
+                    message: "Id of hotel is required"
+                })
+            }
+            const hotel = await Hotel.findById(id)
+            if (!hotel) {
+                res.status(404).json({
+                    message: "Hotel is not found"
+                })
+            }
+            res.json(hotel);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Something went wrong!" });
+        }
     }
 }
 async function uploadImages(imageFiles: Express.Multer.File[]) {
