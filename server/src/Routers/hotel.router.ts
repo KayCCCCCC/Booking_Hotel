@@ -3,7 +3,7 @@ import multer from "multer"
 import { hotelController } from "../Controllers/hotel.controller";
 import { verifyToken } from "../Middlewares/auth";
 import { createHotelValidation } from "../Validators/hotel.validator";
-import { body } from "express-validator";
+
 const router = express.Router()
 
 const storage = multer.memoryStorage();
@@ -22,6 +22,9 @@ router.put("/update/:hotelId", verifyToken, upload.array("imageFiles", 6), hotel
 
 // hotel 
 router.get("/search", hotelController.search)
+router.get("/get-all", hotelController.getAll)
 router.get("/get/:id", hotelController.getById)
+router.post("/:hotelId/booking/payment-intent", verifyToken, hotelController.paymentStripe)
+router.post("/:hotelId/booking", verifyToken, hotelController.booking)
 
 export default router
