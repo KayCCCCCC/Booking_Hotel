@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import cloudinary from "cloudinary"
 import Hotel, { HotelType } from '../Models/hotel';
 import Stripe from "stripe";
-import { BookingType } from '../Models/booking';
+import Booking, { BookingType } from '../Models/booking';
 
 const stripe = new Stripe(process.env.STRIPE_API_KEY as string)
 export const hotelController = {
@@ -214,6 +214,9 @@ export const hotelController = {
                 ...req.body,
                 userId: req.userId,
             };
+
+            const booking = new Booking(newBooking)
+            await booking.save();
 
             const hotel = await Hotel.findOneAndUpdate(
                 { _id: req.params.hotelId },
