@@ -27,8 +27,6 @@ export const hotelController = {
             newHotel.lastUpdated = new Date();
             newHotel.userId = req.userId;
 
-            console.log("newHotel: ", newHotel)
-
             //create hotel
             const hotel = new Hotel(newHotel)
             await hotel.save();
@@ -95,7 +93,6 @@ export const hotelController = {
         try {
             const query = constructSearchQuery(req.query);
 
-            console.log(req.query)
             let sortOptions = {};
             switch (req.query.sortOption) {
                 case "starRating":
