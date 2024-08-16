@@ -19,7 +19,7 @@ export const AuthController = {
             if (!isMatch) {
                 return res.status(400).json({ message: "Password is incorrect!" })
             }
-            const token = await jwt.sign({ userId: user.id }, process.env.ACCESS_TOKEN as string)
+            const token = await jwt.sign({ userId: user.id, isAdmin: user.isAdmin }, process.env.ACCESS_TOKEN as string)
 
             res.cookie("auth_token", token, {
                 httpOnly: true,
@@ -36,7 +36,12 @@ export const AuthController = {
 
     validateToken: async (req: Request, res: Response) => {
         try {
-            res.status(200).send({ userId: req.userId })
+            const user = await User.findById(req.userId)
+            if (user) {
+                res.status(200).send({ userId: user._id, isAdmin: user.isAdmin })
+            } else {
+                res.status(400).send({ message: "User Not Found" });
+            }
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: "Something went wrong!" });

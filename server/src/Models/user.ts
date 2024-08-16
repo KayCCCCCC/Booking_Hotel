@@ -7,13 +7,15 @@ export type UserType = {
     password: string;
     firstName: string;
     lastName: string;
+    isAdmin?: boolean
 }
 
 const userSchema = new mongoose.Schema({
     email: { type: String, require: true, unique: true },
     password: { type: String, require: true },
     firstName: { type: String, require: true },
-    lastName: { type: String, require: true }
+    lastName: { type: String, require: true },
+    isAdmin: { type: Boolean, require: false },
 })
 
 userSchema.pre("save", async function (next) {

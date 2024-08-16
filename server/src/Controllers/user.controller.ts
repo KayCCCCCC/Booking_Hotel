@@ -19,12 +19,13 @@ export const userController = {
                 email: req.body.email,
                 password: req.body.password,
                 firstName: req.body.firstName,
-                lastName: req.body.lastName
+                lastName: req.body.lastName,
+                isAdmin: false
             });
 
             await user.save();
 
-            const token = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN as string, {
+            const token = jwt.sign({ userId: user._id, isAdmin: user.isAdmin }, process.env.ACCESS_TOKEN as string, {
                 expiresIn: "1d"
             });
 
