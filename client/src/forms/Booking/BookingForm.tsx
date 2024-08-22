@@ -4,7 +4,7 @@ import { PaymentIntentResponse } from "../../Types/PaymentType";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { StripeCardElement } from "@stripe/stripe-js";
 import { useSearchContext } from "../../contexts/SearchContext";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useMutation } from "react-query";
 import * as apiClient from "../../api-client";
 import { useAppContext } from "../../contexts/AppContext";
@@ -29,6 +29,8 @@ export type BookingFormData = {
 const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     const stripe = useStripe(); // hook of stripe
     const elements = useElements();
+    const navigate = useNavigate();
+    const { isAdmin } = useAppContext();
 
     const search = useSearchContext();
     const { showToast } = useAppContext();
@@ -40,6 +42,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
                 message: "Booking Room Successfully",
                 type: "success"
             })
+            isAdmin ? navigate("/") : navigate("/my-booking")
         },
         onError: (error: Error) => {
             showToast({
